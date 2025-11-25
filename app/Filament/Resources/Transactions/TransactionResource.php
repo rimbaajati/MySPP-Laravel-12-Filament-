@@ -18,6 +18,8 @@ class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
 
+    protected static ?string $recordTitleAttribute = 'code';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     public static function form(Schema $schema): Schema
@@ -43,5 +45,10 @@ class TransactionResource extends Resource
             'create' => CreateTransaction::route('/create'),
             'edit' => EditTransaction::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['code','user_id'];
     }
 }
